@@ -18,6 +18,8 @@ var argOptions = {
     'region': 'us-east-1',
     'default-mime-type': null,
     'add-header': null,
+    'shards': null,
+    'shard': null
   },
   'boolean': [
     'recursive',
@@ -89,6 +91,8 @@ function setup(secretAccessKey, accessKeyId) {
       sslEnabled: !args.insecure,
       region: args.region,
     },
+    shardsTotal: args.shards,
+    shardNumber: args.shard
   });
   var cmd = args._.shift();
   var fn = fns[cmd];
@@ -399,6 +403,9 @@ function setUpProgress(o, notBytes, doneText) {
         var humanSpeed = fmtBytes(bytesPerSec) + '/s';
         parts.push(humanSpeed);
       }
+    }
+    if (o.shardStats) {
+      parts.push(o.shardStats)
     }
     var line = parts.join(", ");
     process.stderr.clearLine();
