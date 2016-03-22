@@ -19,6 +19,7 @@ var argOptions = {
     'default-mime-type': null,
     'add-header': null,
     'shards': null,
+    'whitelist': null,
     'shard': null
   },
   'boolean': [
@@ -92,7 +93,8 @@ function setup(secretAccessKey, accessKeyId) {
       region: args.region,
     },
     shardsTotal: args.shards,
-    shardNumber: args.shard
+    shardNumber: args.shard,
+    whitelist: args.whitelist
   });
   var cmd = args._.shift();
   var fn = fns[cmd];
